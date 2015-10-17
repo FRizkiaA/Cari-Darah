@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+<<<<<<< HEAD
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -23,11 +24,12 @@ public class MainActivity extends AppCompatActivity
     public String jenis_rhesus;
     public static final String POSITIVE = "POSITIVE";
     public static final String NEGATIVE = "NEGATIVE";
-    @Override
+    
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+		
         Spinner dropdown_gol_darah = (Spinner) findViewById(R.id.dropdown_gol_darah);
         String[] items = new String[]{"A","B","AB","O"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item,items);
@@ -100,5 +102,4 @@ public class MainActivity extends AppCompatActivity
         i.putExtra("jenis_rhesus", jenis_rhesus);
         startActivity(i);
     }
-
 }

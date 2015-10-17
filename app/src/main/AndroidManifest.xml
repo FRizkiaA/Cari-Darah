@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
+		<activity
             android:name=".Result"
             android:label="Hasil-Pencarian">
             <intent-filter>
@@ -36,6 +36,6 @@
                 <category android:name="android.intent.category.ALTERNATIVE"/>
             </intent-filter>
         </activity>
-    </application>
+	</application>
 
 </manifest>
