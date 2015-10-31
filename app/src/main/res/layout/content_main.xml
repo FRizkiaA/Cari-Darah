@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bg"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main"
+    tools:context=".MainActivity"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/container_gol_darah">
+
+        <TextView
+            android:id="@+id/text_gol_darah"
+            android:text="Golongan Darah : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="32px"
+            android:layout_centerVertical="true" />
+
+        <Spinner
+            android:id="@+id/dropdown_gol_darah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/text_gol_darah"
+            android:layout_marginLeft="20dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_gol_darah"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/container_gol_darah"
+        android:id="@+id/container_jml_labu">
+
+        <TextView
+            android:id="@+id/text_jml_labu"
+            android:text="Jumlah Labu : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="32px"
+            android:layout_centerVertical="true" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/picker_jml_labu"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/text_jml_labu"
+            android:layout_marginLeft="20dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_jml_labu"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/container_jml_labu"
+        android:id="@+id/container_jns_rhesus">
+
+        <TextView
+            android:id="@+id/text_jns_rhesus"
+            android:text="Jenis Rhesus : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="32px"
+            android:layout_centerVertical="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" + "
+            android:id="@+id/positive_radio_button"
+            android:layout_toRightOf="@id/text_jns_rhesus"
+            android:layout_marginLeft="20dp"
+            android:onClick="onRadioButtonClicked"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:id="@+id/negative_radio_button"
+            android:layout_toRightOf="@id/positive_radio_button"
+            android:layout_alignTop="@id/positive_radio_button"
+            android:layout_marginLeft="20dp"
+            android:onClick="onRadioButtonClicked"
+            android:checked="false"/>
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_cari"
+        android:src="@drawable/bt_cari"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/container_jns_rhesus"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:onClick="onCariButtonClick"/>
+
+</RelativeLayout>
