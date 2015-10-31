@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         Spinner dropdown_gol_darah = (Spinner) findViewById(R.id.dropdown_gol_darah);
+
         String[] items = new String[]{"A","B","AB","O"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item,items);
         dropdown_gol_darah.setAdapter(adapter);
@@ -144,5 +146,4 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
         }
     }
-
 }
