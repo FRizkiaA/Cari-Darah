@@ -32,6 +32,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
     private Marker mMarker;
     private double latitude;
     private double longitude;
+
     //private DirectionTask dt;
 
     @Override
@@ -104,8 +105,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
 
             // Getting Current Location
             Location location = locationManager.getLastKnownLocation(provider);
-
-            location.reset();
+            //location.reset();
             locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
             // Creating a criteria object to retrieve provider
