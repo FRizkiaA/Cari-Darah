@@ -114,8 +114,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-
-    <orderEntry type="jdk" jdkName="Android API 23 Platform (1)" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="httpclient-4.4.1.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-base-8.1.0" level="project" />
@@ -125,8 +124,8 @@
     <orderEntry type="library" exported="" name="play-services-drive-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-panorama-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-8.1.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-basement-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-appstate-8.1.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-wearable-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-appinvite-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-cast-8.1.0" level="project" />

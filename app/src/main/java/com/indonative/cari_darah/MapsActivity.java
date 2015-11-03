@@ -1,9 +1,10 @@
 package com.indonative.cari_darah;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -23,8 +24,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.*;
+import com.indonative.cari_darah.controller.JSONParser;
+import com.indonative.cari_darah.model.PMIBranchModel;
+import com.indonative.cari_darah.utilities.ConstantValues;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback
 {
@@ -32,8 +43,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
     private Marker mMarker;
     private double latitude;
     private double longitude;
-
-    //private DirectionTask dt;
+    private JSONParser jParser = new JSONParser();
+    TextView text_jenis_rhesus, text_golongan_darah, text_jumlah_labu;
+    JSONArray products;
+    String golongan_darah, jenis_rhesus;
+    int jumlah_labu;
+    ArrayList<PMIBranchModel> PMIBranchList = new ArrayList<PMIBranchModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,17 +75,20 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
 
-            String golongan_darah = getIntent().getExtras().getString("golongan_darah");
-            TextView text_golongan_darah = (TextView) findViewById(R.id.golongan_darah);
+            golongan_darah = getIntent().getExtras().getString("golongan_darah");
+            text_golongan_darah = (TextView) findViewById(R.id.golongan_darah);
             text_golongan_darah.setText("Golongan Darah : " + golongan_darah);
 
-            Integer jumlah_labu = getIntent().getExtras().getInt("jumlah_labu", 1);
-            TextView text_jumlah_labu = (TextView) findViewById(R.id.jumlah_labu);
+            jumlah_labu = getIntent().getExtras().getInt("jumlah_labu", 1);
+            text_jumlah_labu = (TextView) findViewById(R.id.jumlah_labu);
             text_jumlah_labu.setText("Jumlah Labu : " + jumlah_labu);
 
-            String jenis_rhesus = getIntent().getExtras().getString("jenis_rhesus");
-            TextView text_jenis_rhesus = (TextView) findViewById(R.id.jenis_rhesus);
+            jenis_rhesus = getIntent().getExtras().getString("jenis_rhesus");
+            text_jenis_rhesus = (TextView) findViewById(R.id.jenis_rhesus);
             text_jenis_rhesus.setText("Jenis Rhesus : " + jenis_rhesus);
+
+            new LoadAllDatas().execute();
+
         }
     }
 
@@ -234,6 +252,26 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
 
     public void addMarkerPMI()
     {
+        double lat;
+        double lng;
+        String nama_cabang;
+        String alamat;
+
+        for(int i = 0; i < PMIBranchList.size(); i++) {
+            lat = PMIBranchList.get(i).getLatitude();
+            lng = PMIBranchList.get(i).getLongitude();
+            nama_cabang = PMIBranchList.get(i).getNamaCabang();
+            alamat = PMIBranchList.get(i).getAlamat();
+            LatLng pos = new LatLng(lat, lng);
+            mMap.addMarker(new MarkerOptions()
+                    .position(pos)
+                    .title(nama_cabang)
+                    .snippet(alamat)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+            Log.e("nama_cabang", nama_cabang);
+        }
+
+        /*
         double lat = -6.184805; //contoh marker PMI DKI Jakarta
         double lng = 106.844868;
         String nama_cabang = "PMI DKI Jakarta";
@@ -257,6 +295,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
                 .title(nama_cabang)
                 .snippet(alamat)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+        */
+
+
     }
 
     @Override
@@ -274,43 +315,61 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
 
     }
 
-    /*class DirectionTask extends AsyncTask<LatLng, Void, ArrayList<LatLng>>
-    {
-        LatLng start;
+    class LoadAllDatas extends AsyncTask<String, String, Bitmap> {
+        ProgressDialog pDialog;
 
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             super.onPreExecute();
-            start = new LatLng(mMarker.getPosition().latitude, mMarker.getPosition().longitude);
+            pDialog = new ProgressDialog(MapsActivity.this);
+            pDialog.setMessage("Create account...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
         }
 
-        @Override
-        protected ArrayList<LatLng> doInBackground(LatLng... params)
-        {
-            Log.e("DALEM DO IN BACKGROUND", "DALAM DO IN BACKGROUND");
-            LatLng dest = new LatLng(params[0].latitude, params[0].longitude);
-            DirectionAPI directionAPI = new DirectionAPI(start, dest);
-            GoogleResponse googleResponse = directionAPI.execute();
-            if (googleResponse.isOk())
-            {
-                DrivingDirection drivingDirection = new DrivingDirection(googleResponse.getJsonObject());
-                ArrayList<LatLng> polyline = drivingDirection.getTotalPolyline();
-                return polyline;
+        protected Bitmap doInBackground(String... args) {
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("golongan_darah", golongan_darah.toUpperCase()));
+            params.add(new BasicNameValuePair("jenis_rhesus", jenis_rhesus.toUpperCase()));
+            params.add(new BasicNameValuePair("jumlah_labu", String.valueOf(jumlah_labu)));
+            params.add(new BasicNameValuePair("bentuk_darah", "WB"));
+            JSONObject json = jParser.makeHttpRequest(ConstantValues.URL_DISPLAY_AVAILABLE_BRANCHES , "POST", params);
+            try {
+                int success = json.getInt("SUCCESS");
+
+                if (success == 1) {
+                    products = json.getJSONArray("PRODUCTS");
+                    for (int i = 0; i < products.length(); i++) {
+                        JSONObject c = products.getJSONObject(i);
+
+                        String kode_cabang = c.getString("KODE_CABANG");
+                        int jumlah_stok = c.getInt("JUMLAH_STOK");
+                        String nama_cabang = c.getString("NAMA_CABANG");
+                        Double longitude = c.getDouble("LONGITUDE");
+                        Double latitude = c.getDouble("LATITUDE");
+                        String alamat = c.getString("ALAMAT");
+
+                        PMIBranchList.add(new PMIBranchModel(kode_cabang, jumlah_stok, nama_cabang, longitude, latitude, alamat));
+                        Log.e("TEST ", kode_cabang + " " + String.valueOf(jumlah_stok) + " " + nama_cabang + " " +
+                                longitude + " " + latitude + " " + alamat);
+
+                    }
+                } else {
+                    pDialog.setMessage("Error when loading image from server");
+                    pDialog.setIndeterminate(false);
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
             return null;
         }
 
-        @Override
-        protected void onPostExecute(ArrayList<LatLng> polyline)
-        {
-            super.onPostExecute(polyline);
-            if(polyline != null)
-            {
-                Log.e("INSIDE POST EXECUTE", "INSIDE POST EXECUTE");
-                mMap.addPolyline(new PolylineOptions().addAll(polyline).width(6).color(Color.RED));
-                this.cancel(true);
-            }
+        protected void onPostExecute(Bitmap zzz) {
+            pDialog.dismiss();
         }
-    }*/
+
+    }
 }

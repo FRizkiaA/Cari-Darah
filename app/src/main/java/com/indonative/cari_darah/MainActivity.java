@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         tracker = new GPSTracker(this);
-        Log.e("ERROORRRRRRRRR", "APAKAH DIALOG MUNCUL??? "+tracker.canGetLocation());
+        Log.e("ERROORRRRRRRRR", "APAKAH DIALOG MUNCUL??? " + tracker.canGetLocation());
         if(!tracker.canGetLocation())
         {
             Log.e("ERROORRRRRRRRR", "DIALOG GAK MUNCUL");

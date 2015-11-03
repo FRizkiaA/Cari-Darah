@@ -1,4 +1,4 @@
-package com.indonative.cari_darah;
+package com.indonative.cari_darah.model;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

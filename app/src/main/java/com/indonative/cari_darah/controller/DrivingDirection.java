@@ -1,6 +1,5 @@
-package com.indonative.cari_darah;
+package com.indonative.cari_darah.controller;
 
-import android.os.Debug;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;

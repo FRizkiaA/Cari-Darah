@@ -1,17 +1,14 @@
 package com.indonative.cari_darah;
 
-import android.os.Debug;
-import android.util.JsonReader;
-import android.util.JsonWriter;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.indonative.cari_darah.controller.JSONParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.HashMap;
