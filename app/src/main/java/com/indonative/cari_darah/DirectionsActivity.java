@@ -36,6 +36,9 @@ public class DirectionsActivity extends FragmentActivity implements OnMapReadyCa
     private Marker mMarker;
     private LatLng dest;
     private DirectionTask dt;
+    private long distance;
+    private long duration;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,7 +74,30 @@ public class DirectionsActivity extends FragmentActivity implements OnMapReadyCa
             String provider = locationManager.getBestProvider(criteria, true);
 
             // Getting Current Location
-            Location location = locationManager.getLastKnownLocation(provider);
+            Location loc = locationManager.getLastKnownLocation(provider);
+            boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            if(loc != null)
+            {
+                locationManager.requestLocationUpdates(provider, 10000, 0, this);
+                location = loc;
+            }
+            else if(isNetworkEnabled)
+            {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+            else if(isGPSEnabled)
+            {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
+                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+            else //!isGPSEnabled && !isNetworkEnabled
+            {
+                //no network provider is enabled
+                Log.e("ERROR PROVIDER", "NO PROVIDER ENABLED");
+            }
 
             if(location!=null)
             {
@@ -180,6 +206,8 @@ public class DirectionsActivity extends FragmentActivity implements OnMapReadyCa
                 DrivingDirection drivingDirection = new DrivingDirection(googleResponse.getJsonObject());
                 ArrayList<LatLng> polyline = drivingDirection.getTotalPolyline();
                 htmlInstructions = drivingDirection.getHtmlInstructions();
+                duration = drivingDirection.getDuration();
+                distance = drivingDirection.getDistance();
                 return polyline;
             }
             return null;
@@ -195,6 +223,8 @@ public class DirectionsActivity extends FragmentActivity implements OnMapReadyCa
                 mMap.addPolyline(new PolylineOptions().addAll(polyline).width(6).color(Color.RED));
                 StringBuilder sb = new StringBuilder();
                 int i = 1;
+                sb.append("<b>Durasi : ").append(duration).append("</b><br/>");
+                sb.append("<b>Jarak : ").append(distance).append("</b><br/>");
                 for (String instruct : htmlInstructions)
                 {
                     sb.append("<b>"+i+".</b> ").append(instruct).append("<br/>");

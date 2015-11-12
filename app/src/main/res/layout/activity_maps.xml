@@ -22,7 +22,7 @@
         android:text="Golongan Darah : ?"
         android:layout_below="@id/map"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         />
 
     <TextView
@@ -31,7 +31,7 @@
         android:id="@+id/jumlah_labu"
         android:text="Jumlah Labu : ? "
         android:layout_below="@id/golongan_darah"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@id/golongan_darah"
         />
 
@@ -41,7 +41,7 @@
         android:id="@+id/jenis_rhesus"
         android:text="Jenis Rhesus : ? "
         android:layout_below="@id/jumlah_labu"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@id/jumlah_labu"
         />
 
@@ -51,8 +51,17 @@
         android:id="@+id/position"
         android:text="Position : ? "
         android:layout_below="@id/jenis_rhesus"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@id/jenis_rhesus"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list"
+        android:text="List : ? "
+        android:layout_below="@id/position"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        />
 </RelativeLayout>

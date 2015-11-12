@@ -120,9 +120,9 @@ public class MainActivity extends AppCompatActivity
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         //getting network status
-        //boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        boolean isNetworkEnabled = isNetworkAvailable();
-
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        //boolean isNetworkEnabled = isNetworkAvailable();
+        Log.e("STATUS PROVIDER", "GPS : " + isGPSEnabled + " NETWORK : " + isNetworkEnabled);
         if(!isGPSEnabled)
         {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
