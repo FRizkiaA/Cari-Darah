@@ -2,6 +2,7 @@ package com.indonative.cari_darah;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -308,7 +309,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
     public void onProviderDisabled(String provider) {
 
     }
+    class GetDirections extends AsyncTask<LatLng, Void, Void>
+    {
+        LatLng start;
+        ProgressDialog pdLoading = new ProgressDialog(MapsActivity.this);
 
+<<<<<<< HEAD
     @Override
     public void onGpsStatusChanged(int event)
     {
