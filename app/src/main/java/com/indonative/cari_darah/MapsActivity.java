@@ -309,10 +309,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
     public void onProviderDisabled(String provider) {
 
     }
-    class GetDirections extends AsyncTask<LatLng, Void, Void>
-    {
-        LatLng start;
-        ProgressDialog pdLoading = new ProgressDialog(MapsActivity.this);
 
     @Override
     public void onGpsStatusChanged(int event)
@@ -338,156 +334,159 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
         };
     }
 
-    private String getDurationString(int seconds)
-    {
-       int minutes = 0;
-       int hours = 0;
-       int days = 0;
-       int months = 0;
-       int years = 0;
-       if(seconds >= 60)
-       {
-           minutes = Double.valueOf(Math.floor(seconds / 60)).intValue();
-           seconds = seconds%60;
-
-           if(minutes >= 60)
-           {
-               hours = Double.valueOf(Math.floor(minutes / 60)).intValue();
-               minutes = minutes%60;
-
-               if(hours >= 24)
-               {
-                   days = Double.valueOf(Math.floor(hours / 24)).intValue();
-                   hours = hours%24;
-
-                   if(days >= 30)
-                   {
-                       months = Double.valueOf(Math.floor(days / 30)).intValue();
-                       days = days%30;
-
-                       if(months >= 12)
-                       {
-                           years = Double.valueOf(Math.floor(months / 12)).intValue();
-                           months = months%12;
-                       }
-                   }
-               }
-           }
-       }
-       StringBuilder sb = new StringBuilder();
-       if(years > 0)
-       {
-           sb.append(Integer.toString(years));
-           if(years > 1)
-               sb.append(" Years ");
-           else
-               sb.append(" Year ");
-       }
-        if(months > 0)
-        {
-            sb.append(Integer.toString(months));
-            if(months > 1)
-                sb.append(" Months ");
-            else
-                sb.append(" Month ");
-        }
-        if(days > 0)
-        {
-            sb.append(Integer.toString(days));
-            if(days > 1)
-                sb.append(" Days ");
-            else
-                sb.append(" Day ");
-        }
-        if(hours > 0)
-        {
-            sb.append(Integer.toString(hours));
-            if(hours > 1)
-                sb.append(" Hours ");
-            else
-                sb.append(" Hour ");
-        }
-        if(minutes > 0)
-        {
-            sb.append(Integer.toString(minutes));
-            if(minutes > 1)
-                sb.append(" Minutes ");
-            else
-                sb.append(" Minute ");
-        }
-        if(seconds > 0)
-        {
-            sb.append(Integer.toString(seconds)).append(" Second");
-            if(seconds > 1)
-            {
-                sb.append("s");
-            }
-        }
-        return sb.toString();
-    }
-
-    private String getDistanceString(int meters)
-    {
-        StringBuilder sb = new StringBuilder();
-        if(meters < 1000)
-        {
-            if(meters <= 1)
-                sb.append(Integer.toString(meters)).append(" Meter");
-            else
-                sb.append(Integer.toString(meters)).append(" Meters");
-        }
-        else
-        {
-            Double kiloMeters = Double.valueOf(meters/1000);
-            sb.append(Double.toString(kiloMeters)).append(" KM");
-        }
-        return sb.toString();
-    }
-
-    void sortByDistance()
-    {
-        int i = 0;
-        for(Map.Entry<String, Long> entry : distanceHashMap.entrySet())
-        {
-            al.add(i,new DistanceMap(entry.getKey(), entry.getValue(), durationHashMap.get(entry.getKey())));
-            i++;
-        }
-
-        DistanceMap temp;
-        boolean swap = true;
-        while(swap)
-        {
-            for(i=0; i<al.size()-1; i++)
-            {
-                if(al.get(i).jarak > al.get(i+1).jarak)
-                {
-                    temp = al.get(i);
-                    al.set(i,al.get(i+1));
-                    al.set(i+1,temp);
-                    swap = true;
-                    break;
-                }
-                else
-                {
-                    swap = false;
-                }
-                Log.e("PRINT ARRAY", "No. - " + i );
-            }
-        }
-        /*distanceHashMap.clear();
-        durationHashMap.clear();
-        for (i=0; i<al.size(); i++)
-        {
-            Log.e("PRINT ARRAY", al.get(i).nama_cabang);
-            distanceHashMap.put(al.get(i).nama_cabang, al.get(i).jarak);
-            durationHashMap.put(al.get(i).nama_cabang, al.get(i).durasi);
-        }*/
-    }
-
     class GetDirections extends AsyncTask<LatLng, Void, Void>
     {
         LatLng start;
         ProgressDialog pdLoading = new ProgressDialog(MapsActivity.this);
+
+
+
+        private String getDurationString(int seconds)
+        {
+           int minutes = 0;
+           int hours = 0;
+           int days = 0;
+           int months = 0;
+           int years = 0;
+           if(seconds >= 60)
+           {
+               minutes = Double.valueOf(Math.floor(seconds / 60)).intValue();
+               seconds = seconds%60;
+
+               if(minutes >= 60)
+               {
+                   hours = Double.valueOf(Math.floor(minutes / 60)).intValue();
+                   minutes = minutes%60;
+
+                   if(hours >= 24)
+                   {
+                       days = Double.valueOf(Math.floor(hours / 24)).intValue();
+                       hours = hours%24;
+
+                       if(days >= 30)
+                       {
+                           months = Double.valueOf(Math.floor(days / 30)).intValue();
+                           days = days%30;
+
+                           if(months >= 12)
+                           {
+                               years = Double.valueOf(Math.floor(months / 12)).intValue();
+                               months = months%12;
+                           }
+                       }
+                   }
+               }
+           }
+           StringBuilder sb = new StringBuilder();
+           if(years > 0)
+           {
+               sb.append(Integer.toString(years));
+               if(years > 1)
+                   sb.append(" Years ");
+               else
+                   sb.append(" Year ");
+           }
+            if(months > 0)
+            {
+                sb.append(Integer.toString(months));
+                if(months > 1)
+                    sb.append(" Months ");
+                else
+                    sb.append(" Month ");
+            }
+            if(days > 0)
+            {
+                sb.append(Integer.toString(days));
+                if(days > 1)
+                    sb.append(" Days ");
+                else
+                    sb.append(" Day ");
+            }
+            if(hours > 0)
+            {
+                sb.append(Integer.toString(hours));
+                if(hours > 1)
+                    sb.append(" Hours ");
+                else
+                    sb.append(" Hour ");
+            }
+            if(minutes > 0)
+            {
+                sb.append(Integer.toString(minutes));
+                if(minutes > 1)
+                    sb.append(" Minutes ");
+                else
+                    sb.append(" Minute ");
+            }
+            if(seconds > 0)
+            {
+                sb.append(Integer.toString(seconds)).append(" Second");
+                if(seconds > 1)
+                {
+                    sb.append("s");
+                }
+            }
+            return sb.toString();
+        }
+
+        private String getDistanceString(int meters)
+        {
+            StringBuilder sb = new StringBuilder();
+            if(meters < 1000)
+            {
+                if(meters <= 1)
+                    sb.append(Integer.toString(meters)).append(" Meter");
+                else
+                    sb.append(Integer.toString(meters)).append(" Meters");
+            }
+            else
+            {
+                Double kiloMeters = Double.valueOf(meters/1000);
+                sb.append(Double.toString(kiloMeters)).append(" KM");
+            }
+            return sb.toString();
+        }
+
+        void sortByDistance()
+        {
+            int i = 0;
+            for(Map.Entry<String, Long> entry : distanceHashMap.entrySet())
+            {
+                al.add(i,new DistanceMap(entry.getKey(), entry.getValue(), durationHashMap.get(entry.getKey())));
+                i++;
+            }
+
+            DistanceMap temp;
+            boolean swap = true;
+            while(swap)
+            {
+                for(i=0; i<al.size()-1; i++)
+                {
+                    if(al.get(i).jarak > al.get(i+1).jarak)
+                    {
+                        temp = al.get(i);
+                        al.set(i,al.get(i+1));
+                        al.set(i+1,temp);
+                        swap = true;
+                        break;
+                    }
+                    else
+                    {
+                        swap = false;
+                    }
+                    Log.e("PRINT ARRAY", "No. - " + i );
+                }
+            }
+            /*distanceHashMap.clear();
+            durationHashMap.clear();
+            for (i=0; i<al.size(); i++)
+            {
+                Log.e("PRINT ARRAY", al.get(i).nama_cabang);
+                distanceHashMap.put(al.get(i).nama_cabang, al.get(i).jarak);
+                durationHashMap.put(al.get(i).nama_cabang, al.get(i).durasi);
+            }*/
+        }
+
 
         @Override
         protected void onPreExecute()
