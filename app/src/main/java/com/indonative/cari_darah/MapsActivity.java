@@ -314,7 +314,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
         LatLng start;
         ProgressDialog pdLoading = new ProgressDialog(MapsActivity.this);
 
-<<<<<<< HEAD
     @Override
     public void onGpsStatusChanged(int event)
     {
