@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="firstTextColor">#FFFFFF</color>
-    <color name="secondTextColor">#FF4081</color>
+    <color name="secondTextColor">#da2a21</color>
+    <color name="thirdTextColor">#67626a</color>
+    <color name="barBackground">#da2a21</color>
 </resources>
