@@ -1,5 +1,6 @@
 package com.indonative.cari_darah;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +19,7 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-public class MainMenu extends AppCompatActivity
+public class MainMenu extends Activity
 {
     public String golongan_darah;
     public String jenis_rhesus;
