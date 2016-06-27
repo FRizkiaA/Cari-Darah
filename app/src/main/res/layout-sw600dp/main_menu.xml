@@ -37,11 +37,11 @@
 
             <TextView
                 android:text="Apa Kebutuhanmu ?"
-                android:layout_width="250dp"
+                android:layout_width="375dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:textColor="@color/secondTextColor"
                 android:textSize="@dimen/font_size_large" />
 
@@ -53,8 +53,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="40dp"
                     android:textColor="@color/thirdTextColor"
                     android:textSize="@dimen/font_size_medium"
                     android:text="Golongan Darah :"/>
@@ -64,7 +64,7 @@
                     android:layout_width="100dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="45dp"
                     android:entries="@array/golongan_darah_array"
                     />
             </LinearLayout>
@@ -77,8 +77,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="40dp"
                     android:textColor="@color/thirdTextColor"
                     android:textSize="@dimen/font_size_medium"
                     android:text="Jumlah Labu :"/>
@@ -86,7 +86,7 @@
                 <Spinner
                     android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:id="@+id/dropdown_jml_labu"
                     android:entries="@array/jumlah_labu_array"
@@ -101,8 +101,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="40dp"
                     android:textColor="@color/thirdTextColor"
                     android:textSize="@dimen/font_size_medium"
                     android:text="Rhesus :"/>
@@ -110,7 +110,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:text=" + "
                     android:id="@+id/positive_radio_button"
@@ -120,7 +120,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:text=" - "
                     android:id="@+id/negative_radio_button"
@@ -131,7 +131,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/secondTextColor"
                 android:paddingTop="10dp"
@@ -140,7 +140,7 @@
                 android:paddingRight="30dp"
                 android:id="@+id/button_cari"
                 android:text="Cari"
-                android:textSize="@dimen/font_size_medium"
+                android:textSize="@dimen/font_size_large"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:onClick="onCariButtonClick"/>

@@ -530,6 +530,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
                         Log.e("TEST ", kode_cabang + " " + String.valueOf(jumlah_stok) + " " + nama_cabang + " " +
                                 longitude + " " + latitude + " " + alamat);
 
+
                     }
                 }
                 else

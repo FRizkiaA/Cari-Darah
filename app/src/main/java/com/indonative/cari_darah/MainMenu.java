@@ -26,6 +26,8 @@ public class MainMenu extends Activity
     public static final String POSITIVE = "POSITIVE";
     public static final String NEGATIVE = "NEGATIVE";
     public GPSTracker tracker;
+    public int jumlah_labu;
+    public String jumlah_labu_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,9 +44,7 @@ public class MainMenu extends Activity
         }
 
         Spinner dropdown_gol_darah = (Spinner) findViewById(R.id.dropdown_gol_darah);
-        String[] items = new String[]{"A","B","AB","O"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainMenu.this,android.R.layout.simple_spinner_dropdown_item,items);
-        dropdown_gol_darah.setAdapter(adapter);
+
         dropdown_gol_darah.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -61,16 +61,19 @@ public class MainMenu extends Activity
 
         jenis_rhesus = POSITIVE;//init
 
-        NumberPicker picker_jumlah_labu = (NumberPicker) findViewById(R.id.picker_jml_labu);
-        picker_jumlah_labu.setMinValue(1);
-        picker_jumlah_labu.setMaxValue(25);
-        picker_jumlah_labu.setWrapSelectorWheel(true);
-        picker_jumlah_labu.setOnValueChangedListener(new NumberPicker.OnValueChangeListener()
-        {
+        Spinner dropdown_jumlah_labu = (Spinner) findViewById(R.id.dropdown_jml_labu);
+        dropdown_jumlah_labu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal)
-            {
-                picker.setValue(newVal);
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                //Log.v("item", (String) parent.getItemAtPosition(position));
+                jumlah_labu_string = (String) parent.getItemAtPosition(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                jumlah_labu_string = "1";//init
             }
         });
     }
@@ -149,10 +152,10 @@ public class MainMenu extends Activity
         }
         else
         {
-            NumberPicker picker_jumlah_labu = (NumberPicker) findViewById(R.id.picker_jml_labu);
             Intent i = new Intent(MainMenu.this, MapsActivity.class);
             i.putExtra("golongan_darah", golongan_darah);
-            i.putExtra("jumlah_labu", picker_jumlah_labu.getValue());
+            jumlah_labu = Integer.parseInt(jumlah_labu_string);
+            i.putExtra("jumlah_labu", jumlah_labu);
             i.putExtra("jenis_rhesus", jenis_rhesus);
             startActivity(i);
         }
