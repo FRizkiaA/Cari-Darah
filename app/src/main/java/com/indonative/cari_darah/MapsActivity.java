@@ -71,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.direction_view);
 
         //getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -86,24 +86,21 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
         }
         else
         {
-            //Google Play Service are available
-
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
 
             golongan_darah = getIntent().getExtras().getString("golongan_darah");
-            text_golongan_darah = (TextView) findViewById(R.id.golongan_darah);
-            text_golongan_darah.setText("Golongan Darah : " + golongan_darah);
+            /*text_golongan_darah = (TextView) findViewById(R.id.golongan_darah);
+            text_golongan_darah.setText("Golongan Darah : " + golongan_darah);*/
 
             jumlah_labu = getIntent().getExtras().getInt("jumlah_labu", 1);
-            text_jumlah_labu = (TextView) findViewById(R.id.jumlah_labu);
-            text_jumlah_labu.setText("Jumlah Labu : " + jumlah_labu);
+            /*text_jumlah_labu = (TextView) findViewById(R.id.jumlah_labu);
+            text_jumlah_labu.setText("Jumlah Labu : " + jumlah_labu);*/
 
             jenis_rhesus = getIntent().getExtras().getString("jenis_rhesus");
-            text_jenis_rhesus = (TextView) findViewById(R.id.jenis_rhesus);
-            text_jenis_rhesus.setText("Jenis Rhesus : " + jenis_rhesus);
+            /*text_jenis_rhesus = (TextView) findViewById(R.id.jenis_rhesus);
+            text_jenis_rhesus.setText("Jenis Rhesus : " + jenis_rhesus);*/
 
             //PMIBranchList.add(new PMIBranchModel("DKIJKT", 54, "PMI DKI Jakarta", 106.844868, -6.184805, "Jl. Kramat Raya No.47, Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10450"));
             //PMIBranchList.add(new PMIBranchModel("BDGKOTA", 50, "PMI Kota Bandung", 107.62405900, -6.90988900, "Jalan Aceh No. 79, Jalan Aceh, Bandung, Jawa Barat 40113"));
@@ -232,7 +229,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
     @Override
     public void onLocationChanged(Location location)
     {
-        TextView tv_position = (TextView) findViewById(R.id.position);
+        //TextView tv_position = (TextView) findViewById(R.id.position);
 
         //Getting latitude of the current location
         latitude = location.getLatitude();
@@ -250,7 +247,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
         //Setting latitude and longitude in the TextView tv_position
-        tv_position.setText("Latitude : " + latitude + ", Longitude : " + longitude);
+        //tv_position.setText("Latitude : " + latitude + ", Longitude : " + longitude);
 
         if(mMarker != null)
         {
@@ -529,6 +526,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener, 
                         PMIBranchList.add(new PMIBranchModel(kode_cabang, jumlah_stok, nama_cabang, longitude, latitude, alamat));
                         Log.e("TEST ", kode_cabang + " " + String.valueOf(jumlah_stok) + " " + nama_cabang + " " +
                                 longitude + " " + latitude + " " + alamat);
+
 
                     }
                 }

@@ -2,4 +2,22 @@
     <string name="app_name">Cari-Darah</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+    <string-array name="golongan_darah_array">
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+    </string-array>
+    <string-array name="jumlah_labu_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>
