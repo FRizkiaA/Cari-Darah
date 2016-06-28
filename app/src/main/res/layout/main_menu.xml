@@ -57,7 +57,7 @@
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/thirdTextColor"
                     android:textSize="@dimen/font_size_medium"
-                    android:text="Golongan Darah :"/>
+                    android:text="Golongan Darah :" />
 
                 <Spinner
                     android:id="@+id/dropdown_gol_darah"
@@ -65,8 +65,8 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:entries="@array/golongan_darah_array"
-                    />
+                    android:entries="@array/golongan_darah_array" />
+
             </LinearLayout>
 
             <LinearLayout
